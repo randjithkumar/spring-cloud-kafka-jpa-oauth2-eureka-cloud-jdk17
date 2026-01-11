@@ -7,10 +7,10 @@
 [Ports Used]
 
   1. MariaDB - 3307
-  2. authentic - 9000
-  3. account - 2222
+  2. authentic - 9999
+  3. account - 5551
   4. discovery (Netflix Eureka) - 8761
-  5. gateway - 8765
+  5. gateway - 5559
 
 [DB Changes]
 

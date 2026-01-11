@@ -1,0 +1,46 @@
+package com.myapp.authentic.service;
+
+import com.myapp.authentic.entity.User;
+import com.myapp.authentic.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// Get JPA entity from database
+		User userEntity = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+
+		// ✅ CREATE authorities from String → List<SimpleGrantedAuthority>
+		/*
+		 * List<SimpleGrantedAuthority> authorities = (userEntity.getAuthorities() ==
+		 * null || userEntity.getAuthorities().isEmpty()) ? List.of() :
+		 * Arrays.stream(userEntity.getAuthorities().split(",")).map(String::trim)
+		 * .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		 */
+
+		// ✅ CREATE NEW Spring Security User (NOT assign JPA entity)
+		return new org.springframework.security.core.userdetails.User(userEntity.getUsername(), // username
+				userEntity.getPassword(), // password
+				userEntity.isEnabled(), // enabled
+				true, // accountNonExpired
+				true, // credentialsNonExpired
+				true, // accountNonLocked
+				authorities // authorities list
+		);
+	}
+}

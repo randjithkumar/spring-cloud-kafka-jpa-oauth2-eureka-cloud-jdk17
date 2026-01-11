@@ -1,0 +1,27 @@
+package com.myapp.authentic.service;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+public class UserDetailsServiceConfig {
+    
+	/*
+	 * @Bean public UserDetailsService userDetailsService(PasswordEncoder
+	 * passwordEncoder) { UserDetails user = User.withUsername("user")
+	 * .password(passwordEncoder.encode("password")) .roles("USER") .build(); return
+	 * new InMemoryUserDetailsManager(user); }
+	 */
+	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();  // ✅ Define PasswordEncoder bean FIRST
+    }
+    
+	public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {  // ✅ Now injectable
+        return new CustomUserDetailsService(passwordEncoder);  // Pass encoder to service
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="eureka"/>
+			<item value="registeredClientRepository"/>
+			<item value="client"/>
+			<item value="springsecurity"/>
+			<item value="netflix"/>
+			<item value="jpa"/>
+			<item value="cloud"/>
+			<item value="val"/>
+			<item value="maria"/>
+			<item value="mapstruct.version"/>
+			<item value="eureka-client"/>
+			<item value="lower-case-service-id: true"/>
+			<item value="mysql"/>
+			<item value="web"/>
+			<item value="gatewa"/>
+		</list>
+	</section>
+</section>

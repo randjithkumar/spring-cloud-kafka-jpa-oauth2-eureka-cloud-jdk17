@@ -3,11 +3,7 @@ server:
 
 spring:  
   application:
-    name: discovery
-
-logging:
-  level:
-    org.springframework.cloud.netflix.eureka: TRACE
+    name: discovery-service
     
 eureka:
   instance:
@@ -17,3 +13,16 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - health
+
+logging:
+    level:
+      '[org.springframework.cloud.netflix.eureka]': trace

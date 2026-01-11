@@ -1,0 +1,8 @@
+package com.myapp.authentic.service;
+
+public class Snippet {
+	public static void main(String[] args) {
+		UserDetailsServiceConfig
+	}
+}
+

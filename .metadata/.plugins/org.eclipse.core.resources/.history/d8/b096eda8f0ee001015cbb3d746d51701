@@ -1,0 +1,43 @@
+server:  
+  port: ${PORT:5551}
+
+spring:
+  cloud:
+    compatibility-verifier:
+     enabled: false
+  application:
+    name: account-service
+  datasource:
+    url: jdbc:mariadb://localhost:3307/accountdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: password
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate: 
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console: 
+      enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      user-type: CLIENT
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: health,info,heapdump
+    health:
+      enabled: true
+    heapdump:
+      access: unrestricted
+      access:restricted

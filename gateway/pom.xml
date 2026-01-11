@@ -52,6 +52,11 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         
+        <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
+        
         <!-- Spring Security (OAuth2 handled differently in Boot 3) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

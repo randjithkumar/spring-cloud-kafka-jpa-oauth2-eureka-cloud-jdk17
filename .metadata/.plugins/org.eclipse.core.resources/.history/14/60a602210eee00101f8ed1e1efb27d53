@@ -1,0 +1,22 @@
+package com.myapp.gateway;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@SpringBootApplication
+@EnableDiscoveryClient
+public class GatewayApplication(exclude = {DataSourceAutoConfiguration.class}) {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GatewayApplication.class, args);
+	}
+
+	/*
+	 * @Bean public DataSource dataSource() { return DataSourceBuilder.create().url(
+	 * "jdbc:mariadb://10.203.105.173:3307/default?useSSL=false")
+	 * .username("root").password("password").driverClassName(
+	 * "com.mariadb.jdbc.Driver").build(); }
+	 */
+}
