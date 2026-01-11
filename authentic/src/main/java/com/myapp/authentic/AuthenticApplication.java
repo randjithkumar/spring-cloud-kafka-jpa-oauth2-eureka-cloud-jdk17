@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
-@EnableWebSecurity
 public class AuthenticApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AuthenticApplication.class, args);

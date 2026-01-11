@@ -1,5 +1,8 @@
 package com.myapp.account.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@EntityScan("com.myapp.account.model")
+@EnableJpaRepositories
 @Table(name = "account")
 @Data
 @NoArgsConstructor
