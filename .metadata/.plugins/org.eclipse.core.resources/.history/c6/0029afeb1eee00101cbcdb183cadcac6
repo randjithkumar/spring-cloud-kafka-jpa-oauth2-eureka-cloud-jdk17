@@ -1,0 +1,97 @@
+package com.myapp.account.api;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.myapp.account.model.Account;
+import com.myapp.account.repository.AccountRepository;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/api/accounts")
+public class AccountController {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    // GET /api/accounts - Get all accounts
+    @GetMapping
+    public ResponseEntity<List<Account>> getAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return ResponseEntity.ok(accounts);
+    }
+
+    // GET /api/accounts/{id} - Get account by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable Integer id) {
+        Optional<Account> account = accountRepository.findById(id);
+        return account.map(ResponseEntity::ok)
+                     .orElse(ResponseEntity.notFound().build());
+    }
+
+    // GET /api/accounts/customer/{customerId} - Get accounts by customer
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity<List<Account>> getAccountsByCustomerId(@PathVariable Integer customerId) {
+        List<Account> accounts = accountRepository.findByCustomerId(customerId);
+        return ResponseEntity.ok(accounts);
+    }
+
+    // POST /api/accounts - Create new account
+    @PostMapping
+    public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account) {
+        Account savedAccount = accountRepository.save(account);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedAccount);
+    }
+
+    // PUT /api/accounts/{id} - Update account
+    @PutMapping("/{id}")
+    public ResponseEntity<Account> updateAccount(@PathVariable Integer id, 
+                                               @Valid @RequestBody Account accountDetails) {
+        return accountRepository.findById(id)
+            .map(account -> {
+                account.setCustomerId(accountDetails.getCustomerId());
+                account.setNumber(accountDetails.getNumber());
+                account.setAmount(accountDetails.getAmount());
+                Account updatedAccount = accountRepository.save(account);
+                return ResponseEntity.ok(updatedAccount);
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    // PATCH /api/accounts/{id} - Partial update amount
+    @PatchMapping("/{id}/amount")
+    public ResponseEntity<Account> updateAmount(@PathVariable Integer id, 
+                                              @RequestBody int newAmount) {
+        return accountRepository.findById(id)
+            .map(account -> {
+                account.setAmount(newAmount);
+                Account updatedAccount = accountRepository.save(account);
+                return ResponseEntity.ok(updatedAccount);
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    // DELETE /api/accounts/{id} - Delete account
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAccount(@PathVariable Integer id) {
+        if (accountRepository.existsById(id)) {
+            accountRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+}
