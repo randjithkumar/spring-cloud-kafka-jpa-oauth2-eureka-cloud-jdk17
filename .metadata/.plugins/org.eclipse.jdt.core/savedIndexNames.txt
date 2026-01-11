@@ -1,9 +1,0 @@
-INDEX VERSION 1.134+E:\Development\Spring_Dev\sts_version4\interviewnow\.metadata\.plugins\org.eclipse.jdt.core
-3908354911.index
-2280763450.index
-275037166.index
-1865797976.index
-4069725745.index
-776807851.index
-2645315103.index
-3996728289.index

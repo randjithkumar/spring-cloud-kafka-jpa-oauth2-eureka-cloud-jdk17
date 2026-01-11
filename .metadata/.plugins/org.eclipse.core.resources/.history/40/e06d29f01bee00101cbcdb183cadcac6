@@ -1,5 +1,0 @@
-package com.myapp.account.repository;
-// AccountRepository.java
-public interface AccountRepository extends JpaRepository<Account, Integer> {
-    List<Account> findByCustomerId(Integer customerId);
-}

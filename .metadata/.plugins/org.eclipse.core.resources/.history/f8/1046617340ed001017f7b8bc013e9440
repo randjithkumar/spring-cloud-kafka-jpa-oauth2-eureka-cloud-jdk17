@@ -1,3 +1,0 @@
-spring.application.name=authentic
-spring.session.store-type=jdbc
-spring.session.jdbc.initialize-schema=always
