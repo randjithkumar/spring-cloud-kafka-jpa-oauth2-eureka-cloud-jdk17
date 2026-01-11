@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: account-service
+    name: account
   datasource:
     hikari:
       maximum-pool-size: 20

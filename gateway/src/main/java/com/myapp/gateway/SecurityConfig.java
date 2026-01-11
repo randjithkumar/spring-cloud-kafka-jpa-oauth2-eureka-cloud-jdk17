@@ -9,7 +9,6 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
-@EnableWebSecurity
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
@@ -20,9 +19,8 @@ public class SecurityConfig {
                 .pathMatchers("/actuator/**").permitAll()
                 .anyExchange().authenticated()
             )
-            .oauth2Login(Customizer.withDefaults())
-            .oauth2ResourceServer(resourceServer -> 
-                resourceServer.jwt(Customizer.withDefaults()));
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+            .oauth2Login(Customizer.withDefaults());
         
         return http.build();
     }
