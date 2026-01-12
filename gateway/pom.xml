@@ -40,6 +40,18 @@
     </dependencyManagement>
     
     <dependencies>
+    
+  	    <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-oauth2-client</artifactId>
+	    </dependency>
+	    
+    	<!-- OAuth2 Resource Server (replaces spring-cloud-starter-oauth2) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        
         <!-- Spring Boot Webflux + Gateway (Zuul removed in Spring Cloud 202x) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -62,16 +74,12 @@
 		    <artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 		
-		<dependency>
+		<!--<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-oauth2-client</artifactId>
-		</dependency>
+		</dependency>-->
         
-        <!-- OAuth2 Resource Server (replaces spring-cloud-starter-oauth2) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-        </dependency>
+        
         
         <!-- Spring Security (OAuth2 handled differently in Boot 3) -->
         <dependency>
@@ -98,10 +106,10 @@
         </dependency>
         
         <!-- JDBC + MariaDB -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
+        </dependency>-->
         <!--<dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>

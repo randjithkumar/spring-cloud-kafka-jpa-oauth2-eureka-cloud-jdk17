@@ -2,7 +2,7 @@ server:
   port: ${PORT:5559}
 spring:
   application:
-    name: gateway
+    name: gateway-server
   
   # FIXED: Correct Spring Cloud Gateway 2025.0.0 properties
   cloud:
@@ -13,9 +13,9 @@ spring:
           - id: account
             uri: lb://account
             predicates:
-            - Path=/account/**
+              - Path=/account/**
             filters:
-            - TokenRelay=  # OAuth2 Token Relay
+              - TokenRelay=  # OAuth2 Token Relay
           - id: authentic
             uri: http://localhost:9999
             predicates:
